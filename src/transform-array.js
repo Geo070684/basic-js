@@ -13,11 +13,58 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+
+arr = [1, 2, 3]
+function transform(arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
+  }
+
+  const newArr = [...arr];
+  // console.log(newArr)
+  for (let i = 0; i < newArr.length; i++) {
+
+    if (newArr[i] == "--discard-next") {
+      newArr.splice(i, 2)
+    }
+
+    if (newArr[i] == "--discard-prev" && newArr[i - 2] !== '--discard-next' && i > 0) {
+      newArr.splice(i - 1, 2)
+    }
+
+    if (newArr[i] == "--discard-prev" && newArr[i - 2] !== '--discard-next' && i == 0) {
+      newArr.splice(0, 1)
+    }
+
+    if (newArr[i] == "--double-next" && i < newArr.length - 1) {
+      let newArr1;
+      newArr1 = newArr.slice(i + 1, i + 2)
+      newArr.splice(i + 2, 0, newArr1)
+      newArr.splice(i, 1)
+    }
+    if (newArr[i] == "--double-next" && i === newArr.length - 1) {
+     
+      newArr.splice(i, 1)
+    } 
+
+    if (newArr[i] == "--double-prev" && i != 0) {
+      let newArr1;
+      newArr1 = newArr.slice(i - 1, i)
+      console.log(newArr1)
+      newArr.splice(i - 1, 0, newArr1)
+      newArr.splice(i + 1, 1)
+      console.log(newArr)
+    }
+
+    if (newArr[i] == "--double-prev" && i === 0) {
+      newArr.splice(i, 1)
+    }
+
+  } console.log(newArr.flat())
 }
+
 
 module.exports = {
   transform
 };
+transform([ 1, 2, 3,'--double-prev', 4, 5 ])
