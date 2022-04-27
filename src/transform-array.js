@@ -14,7 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 
-arr = [1, 2, 3]
+// arr = [1, 2, 3]
 function transform(arr) {
   if (!Array.isArray(arr)) {
     throw new Error("'arr' parameter must be an instance of the Array!");
@@ -60,7 +60,7 @@ function transform(arr) {
       newArr.splice(i, 1)
     }
 
-  } console.log(newArr.flat())
+  } return newArr.flat()
 }
 
 
