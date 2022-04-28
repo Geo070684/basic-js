@@ -32,22 +32,22 @@ function transform(arr) {
       newArr.splice(i - 1, 2)
     }
 
-    if (newArr[i] == "--discard-prev" && newArr[i - 2] !== '--discard-next' && i == 0) {
+    if (newArr[i] == "--discard-prev" &&  i == 0) {
       newArr.splice(0, 1)
     }
 
-    if (newArr[i] == "--double-next" && i < newArr.length - 1) {
+    if (newArr[i] == "--double-next" && newArr[i+2] !== "--double-prev" && i < newArr.length - 1  ) {
       let newArr1;
       newArr1 = newArr.slice(i + 1, i + 2)
       newArr.splice(i + 2, 0, newArr1)
       newArr.splice(i, 1)
     }
-    if (newArr[i] == "--double-next" && i === newArr.length - 1) {
+    if (newArr[i] == "--double-next"  &&  i === newArr.length - 1  ) {
      
       newArr.splice(i, 1)
     } 
 
-    if (newArr[i] == "--double-prev" && i != 0) {
+    if (newArr[i] == "--double-prev" && newArr[i-2] !== "--discard-next" && i != 0 && newArr[i+2] !== "--double-prev") {
       let newArr1;
       newArr1 = newArr.slice(i - 1, i)
       console.log(newArr1)
@@ -56,7 +56,7 @@ function transform(arr) {
       console.log(newArr)
     }
 
-    if (newArr[i] == "--double-prev" && i === 0) {
+    if (newArr[i] == "--double-prev"  && i === 0 && newArr[i+2] !== "--double-prev") {
       newArr.splice(i, 1)
     }
 
